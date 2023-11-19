@@ -13,7 +13,7 @@ import {EvaluationResult} from "../evaluation-result";
 })
 export class EvaluationResultsComponent implements OnChanges {
   displayedColumns: string[] = [
-    "documentNumber", "documentDate", "currencyCode", "currencyCode",
+    "documentNumber", "documentDate", "currencyCode", "currencyDesc",
     "documentValue", "valueUsd", "valuePen", "valueBrl"
   ]
 

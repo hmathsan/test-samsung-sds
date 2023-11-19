@@ -79,6 +79,7 @@ export class SearchCardComponent {
       error: (error: HttpErrorResponse) => {
         console.log("error trying to fetch external api")
         console.error(error)
+        this.isLoading = false
       }
     });
   }

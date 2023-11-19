@@ -20,6 +20,7 @@ public class SearchEvaluationResource {
     }
 
     @GetMapping
+    @CrossOrigin(origins = "http://localhost:4200")
     public @ResponseBody List<SearchEvaluationResponse> searchEvaluation(@RequestParam Map<String, String> params) {
         return service.searchEvaluation(params);
     }

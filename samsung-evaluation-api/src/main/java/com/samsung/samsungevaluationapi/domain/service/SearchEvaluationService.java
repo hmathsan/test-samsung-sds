@@ -56,10 +56,10 @@ public class SearchEvaluationService {
                 LocalDate.parse(params.get(END_DATE_KEY)) : LocalDate.MAX;
 
         documents = documents.entrySet().stream()
-                .filter(map -> !(
-                        map.getValue().getDocumentDate().isBefore(startDate) &&
-                                map.getValue().getDocumentDate().isAfter(endDate)
-                )).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                .filter(map ->
+                        map.getValue().getDocumentDate().isAfter(startDate) &&
+                                map.getValue().getDocumentDate().isBefore(endDate)
+                ).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         return documents.entrySet().stream().map(map -> {
             DocumentsRequest document = map.getValue();
