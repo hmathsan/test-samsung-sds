@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    openfeign:
+      client:
+        config:
+          evaluation:
+            url: ${EVALUATION_URL:https://sdshealthcheck.cellologistics.com.br/sds-devs-evaluation/evaluation}

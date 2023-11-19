@@ -37,5 +37,4 @@ export class EvaluationResultsComponent {
 
   constructor(@ViewChild(MatTable) table: MatTable<EvaluationResults>) {}
 
-  
 }
