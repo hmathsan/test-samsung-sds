@@ -1,24 +1,8 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatCardModule} from "@angular/material/card";
 import {MatTable, MatTableModule} from "@angular/material/table";
-
-enum CurrencyCode {
-  USD = "USD",
-  PEN = "PEN",
-  BRL = "BRL"
-}
-
-export interface EvaluationResults {
-  documentNumber: bigint,
-  documentDate: string,
-  currencyCode: CurrencyCode,
-  currencyDesc: string,
-  documentValue: number,
-  valueUsd: number,
-  valuePen: number,
-  valueBrl: number
-}
+import {EvaluationResult} from "../evaluation-result";
 
 @Component({
   selector: 'app-evaluation-results',
@@ -27,14 +11,19 @@ export interface EvaluationResults {
   templateUrl: './evaluation-results.component.html',
   styleUrl: './evaluation-results.component.css'
 })
-export class EvaluationResultsComponent {
+export class EvaluationResultsComponent implements OnChanges {
   displayedColumns: string[] = [
     "documentNumber", "documentDate", "currencyCode", "currencyCode",
     "documentValue", "valueUsd", "valuePen", "valueBrl"
   ]
 
-  dataSource: EvaluationResults[] = []
+  @Input() dataSource: EvaluationResult[] = []
+  @ViewChild(MatTable) table!: MatTable<EvaluationResult>;
 
-  constructor(@ViewChild(MatTable) table: MatTable<EvaluationResults>) {}
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.table !== undefined) {
+      this.table.renderRows();
+    }
+  }
 
 }

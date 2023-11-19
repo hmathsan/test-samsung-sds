@@ -13,7 +13,7 @@
           <mat-form-field formControlName="currency" ngDefaultControl>
             <mat-label>Selecione...</mat-label>
             <mat-select formControlName="currency">
-              <mat-option *ngFor="let currency of currencies" [value]="currency.currencyCode">{{currency.title}}</mat-option>
+              <mat-option *ngFor="let currency of currencies" [value]="currency[0]">{{currency[1]}}</mat-option>
             </mat-select>
           </mat-form-field>
 

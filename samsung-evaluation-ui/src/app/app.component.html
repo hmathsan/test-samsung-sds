@@ -1,6 +1,6 @@
 <main>
   <div>
-    <app-search-card></app-search-card>
-    <app-evaluation-results></app-evaluation-results>
+    <app-search-card (updateDataSourceEvent)="updateDataSource($event)"></app-search-card>
+    <app-evaluation-results [dataSource]="dataSource"></app-evaluation-results>
   </div>
 </main>

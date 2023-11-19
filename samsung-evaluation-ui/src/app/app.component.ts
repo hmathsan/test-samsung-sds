@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import {SearchCardComponent} from "./search-card/search-card.component";
 import {EvaluationResultsComponent} from "./evaluation-results/evaluation-results.component";
+import {EvaluationResult} from "./evaluation-result";
 
 @Component({
   selector: 'app-root',
@@ -13,4 +14,10 @@ import {EvaluationResultsComponent} from "./evaluation-results/evaluation-result
 })
 export class AppComponent {
   title = 'samsung-evaluation-ui';
+
+  dataSource: EvaluationResult[] = [];
+
+  updateDataSource(dataSource: EvaluationResult[]) {
+    this.dataSource = dataSource;
+  }
 }

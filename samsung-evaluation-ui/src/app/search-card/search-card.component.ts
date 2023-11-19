@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatCardModule} from "@angular/material/card";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -8,37 +8,70 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
-
-interface Currency {
-  currencyCode: string;
-  title: string;
-}
+import {EvaluationResult} from "../evaluation-result";
+import {QuotationService} from "../quotation.service";
+import {CurrencyCode} from "../currency-code";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-search-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
   templateUrl: './search-card.component.html',
   styleUrl: './search-card.component.css'
 })
 export class SearchCardComponent {
-  currencies: Currency[] = [
-    {currencyCode: "USD", title: "Dolar"},
-    {currencyCode: "PEN", title: "Soles Peruano"},
-    {currencyCode: "BRL", title: "Real"}
+  currencies: [CurrencyCode, string][] = [
+    [CurrencyCode.USD, "Dolar"],
+    [CurrencyCode.PEN, "Soles Peruano"],
+    [CurrencyCode.BRL, "Real"]
   ]
 
+  documentNumber = new FormControl('')
+  currency = new FormControl<CurrencyCode | null>(null)
+  startDate = new FormControl<Date | null>(null)
+  endDate = new FormControl<Date | null>(null)
+
   searchForm = new FormGroup({
-    documentNumber: new FormControl(''),
-    currency: new FormControl<Currency | null>(null),
-    startDate: new FormControl<Date | null>(null),
-    endDate: new FormControl<Date | null>(null)
+    documentNumber: this.documentNumber,
+    currency: this.currency,
+    startDate: this.startDate,
+    endDate: this.endDate
   })
 
+  @Output() updateDataSourceEvent = new EventEmitter<Array<EvaluationResult>>();
+
+  constructor(private client: QuotationService) {
+  }
+
   onSubmit() {
-    console.log(this.searchForm.value.documentNumber);
-    console.log(this.searchForm.value.currency);
-    console.log(this.searchForm.value.startDate);
-    console.log(this.searchForm.value.endDate)
+    let quotation = this.client.getQuotation(
+      this.documentNumber.getRawValue(),
+      this.currency.getRawValue(),
+      this.startDate.getRawValue(),
+      this.endDate.getRawValue()
+    );
+
+    quotation.subscribe({
+      next: (response) => {
+        this.updateDataSourceEvent.emit(response)
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log("error trying to fetch external api")
+        console.error(error)
+      }
+    });
   }
 }
