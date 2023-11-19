@@ -1,5 +1,7 @@
 package com.samsung.samsungevaluationapi.app.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.samsung.samsungevaluationapi.cross.serializer.BigDecimalSerializer;
 import com.samsung.samsungevaluationapi.domain.model.CurrencyCode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,8 +20,16 @@ public class SearchEvaluationResponse {
     LocalDate documentDate;
     CurrencyCode currencyCode;
     String currencyDesc;
+
+    @JsonSerialize(using = BigDecimalSerializer.class)
     BigDecimal documentValue;
+
+    @JsonSerialize(using = BigDecimalSerializer.class)
     BigDecimal valueUsd;
+
+    @JsonSerialize(using = BigDecimalSerializer.class)
     BigDecimal valuePen;
+
+    @JsonSerialize(using = BigDecimalSerializer.class)
     BigDecimal valueBrl;
 }
