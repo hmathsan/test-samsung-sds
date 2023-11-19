@@ -34,9 +34,6 @@ docker run -p 4200:80 -d samsung-evaluation-ui
 docker run -p 8080:8080 -d samsung-evaluation-api
 ```
 
-Now just access http://localhost:4200 to access the application UI
-and http://localhost:8080/search-evaluation for the back-end
-
 ### Gradle and NPM
 
 To run using each project build tool do the following
