@@ -22,7 +22,7 @@ export class QuotationService {
   ): Observable<EvaluationResult[]> {
     let params: HttpParams = new HttpParams();
 
-    if (documentNumber != '') params = params.append("documentNumber", documentNumber!);
+    if (documentNumber != '' && documentNumber != null) params = params.append("documentNumber", documentNumber!);
     if (currency != null) params = params.append("currencyCode", currency);
     if (startDate != null) params = params.append("startDate", startDate.toISOString().split("T")[0].toString())
     if (endDate != null) params = params.append("endDate", endDate.toISOString().split("T")[0].toString())

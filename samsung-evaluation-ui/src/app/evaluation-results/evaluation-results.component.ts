@@ -20,10 +20,12 @@ export class EvaluationResultsComponent implements OnChanges {
   @Input() dataSource: EvaluationResult[] = []
   @ViewChild(MatTable) table!: MatTable<EvaluationResult>;
 
+  containsData: boolean = this.dataSource.length > 0
+
   ngOnChanges(changes: SimpleChanges) {
+    this.containsData = this.dataSource.length > 0
     if (this.table !== undefined) {
       this.table.renderRows();
     }
   }
-
 }

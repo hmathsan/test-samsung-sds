@@ -4,44 +4,51 @@
       <mat-card-title>Self Evaluation Results</mat-card-title>
     </mat-card-header>
 
-    <div style="display: flex; justify-content: center; align-content: center; margin: 30px">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <ng-container matColumnDef="documentNumber">
-          <th mat-header-cell *matHeaderCellDef>Document Number</th>
-          <td mat-cell *matCellDef="let evaluation">{{evaluation.documentNumber}}</td>
-        </ng-container>
-        <ng-container matColumnDef="documentDate">
-          <th mat-header-cell *matHeaderCellDef>Document Date</th>
-          <td mat-cell *matCellDef="let evaluation">{{evaluation.documentDate}}</td>
-        </ng-container>
-        <ng-container matColumnDef="currencyCode">
-          <th mat-header-cell *matHeaderCellDef>Currency Code</th>
-          <td mat-cell *matCellDef="let evaluation">{{evaluation.currencyCode}}</td>
-        </ng-container>
-        <ng-container matColumnDef="currencyDec">
-          <th mat-header-cell *matHeaderCellDef>Currency Desc</th>
-          <td mat-cell *matCellDef="let evaluation">{{evaluation.currencyDesc}}</td>
-        </ng-container>
-        <ng-container matColumnDef="documentValue">
-          <th mat-header-cell *matHeaderCellDef>Document Value</th>
-          <td mat-cell *matCellDef="let evaluation">{{evaluation.documentValue}}</td>
-        </ng-container>
-        <ng-container matColumnDef="valueUsd">
-          <th mat-header-cell *matHeaderCellDef>Value USD</th>
-          <td mat-cell *matCellDef="let evaluation">{{evaluation.valueUsd}}</td>
-        </ng-container>
-        <ng-container matColumnDef="valuePen">
-          <th mat-header-cell *matHeaderCellDef>Value PEN</th>
-          <td mat-cell *matCellDef="let evaluation">{{evaluation.valuePen}}</td>
-        </ng-container>
-        <ng-container matColumnDef="valueBrl">
-          <th mat-header-cell *matHeaderCellDef>Value BRL</th>
-          <td mat-cell *matCellDef="let evaluation">{{evaluation.valueBrl}}</td>
-        </ng-container>
+    <div>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+      <div class="results" *ngIf="!containsData">
+        <h1>No Data Found!</h1>
+      </div>
+
+      <div class="results" *ngIf="containsData">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="documentNumber">
+            <th mat-header-cell *matHeaderCellDef>Document Number</th>
+            <td mat-cell *matCellDef="let evaluation">{{evaluation.documentNumber}}</td>
+          </ng-container>
+          <ng-container matColumnDef="documentDate">
+            <th mat-header-cell *matHeaderCellDef>Document Date</th>
+            <td mat-cell *matCellDef="let evaluation">{{evaluation.documentDate}}</td>
+          </ng-container>
+          <ng-container matColumnDef="currencyCode">
+            <th mat-header-cell *matHeaderCellDef>Currency Code</th>
+            <td mat-cell *matCellDef="let evaluation">{{evaluation.currencyCode}}</td>
+          </ng-container>
+          <ng-container matColumnDef="currencyDec">
+            <th mat-header-cell *matHeaderCellDef>Currency Desc</th>
+            <td mat-cell *matCellDef="let evaluation">{{evaluation.currencyDesc}}</td>
+          </ng-container>
+          <ng-container matColumnDef="documentValue">
+            <th mat-header-cell *matHeaderCellDef>Document Value</th>
+            <td mat-cell *matCellDef="let evaluation">{{evaluation.documentValue}}</td>
+          </ng-container>
+          <ng-container matColumnDef="valueUsd">
+            <th mat-header-cell *matHeaderCellDef>Value USD</th>
+            <td mat-cell *matCellDef="let evaluation">{{evaluation.valueUsd}}</td>
+          </ng-container>
+          <ng-container matColumnDef="valuePen">
+            <th mat-header-cell *matHeaderCellDef>Value PEN</th>
+            <td mat-cell *matCellDef="let evaluation">{{evaluation.valuePen}}</td>
+          </ng-container>
+          <ng-container matColumnDef="valueBrl">
+            <th mat-header-cell *matHeaderCellDef>Value BRL</th>
+            <td mat-cell *matCellDef="let evaluation">{{evaluation.valueBrl}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
     </div>
   </mat-card>
 </div>

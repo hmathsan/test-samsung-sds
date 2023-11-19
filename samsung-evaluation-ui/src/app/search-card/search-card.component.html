@@ -6,11 +6,11 @@
     <mat-card-content>
       <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
         <div class="form-fields">
-          <mat-form-field formControlName="documentNumber" ngDefaultControl>
+          <mat-form-field ngDefaultControl>
             <mat-label>Document Number</mat-label>
-            <input matInput>
+            <input matInput formControlName="documentNumber">
           </mat-form-field>
-          <mat-form-field formControlName="currency" ngDefaultControl>
+          <mat-form-field ngDefaultControl>
             <mat-label>Selecione...</mat-label>
             <mat-select formControlName="currency">
               <mat-option *ngFor="let currency of currencies" [value]="currency[0]">{{currency[1]}}</mat-option>
@@ -36,9 +36,12 @@
         </div>
         <div align="end" style="margin: 12px">
           <button mat-raised-button color="primary" type="submit" style="margin-right: 6px">Search</button>
-          <button mat-raised-button color="accent" style="margin-left: 6px">Clear</button>
+          <button mat-raised-button color="accent" style="margin-left: 6px" (click)="clearFields()" type="button">Clear</button>
         </div>
       </form>
+      <mat-card-footer>
+        <mat-progress-bar *ngIf="isLoading" mode="indeterminate" #progressBar></mat-progress-bar>
+      </mat-card-footer>
     </mat-card-content>
   </mat-card>
 </div>

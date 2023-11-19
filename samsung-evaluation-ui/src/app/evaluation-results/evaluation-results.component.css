@@ -2,3 +2,10 @@
   width: 90vw;
   margin-top: 25px
 }
+
+.results {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 30px;
+}
