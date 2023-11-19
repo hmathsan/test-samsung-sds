@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import {SearchCardComponent} from "./search-card/search-card.component";
+import {EvaluationResultsComponent} from "./evaluation-results/evaluation-results.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, SearchCardComponent],
+  imports: [CommonModule, RouterOutlet, SearchCardComponent, EvaluationResultsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
